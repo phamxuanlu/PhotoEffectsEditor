@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/app_background" >
+
+    <TextView
+        android:id="@+id/share_dialog_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/controls_background"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="5dp"
+        android:text="@string/sharedialog_title"
+        android:textColor="@color/sharedialog_title_text_color"
+        android:textSize="20sp" />
+
+    <GridView
+        android:id="@+id/list_share_intents"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/share_dialog_title"
+        android:background="@android:color/transparent"
+        android:columnWidth="80dp"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:numColumns="auto_fit"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="7dp" />
+
+</RelativeLayout>

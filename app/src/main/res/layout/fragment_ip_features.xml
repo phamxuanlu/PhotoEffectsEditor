@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/list_tool_bg"
+    android:layout_height="fill_parent">
+
+    <it.sephiroth.android.library.widget.HListView
+        android:id="@+id/listTransformation"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        app:hlv_dividerWidth="1dp"
+        android:divider="@color/list_tool_divider_color"
+        android:scrollbars="horizontal" />
+
+</LinearLayout>

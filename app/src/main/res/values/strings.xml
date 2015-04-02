@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="empty_content_description"></string>
+    <string name="app_name">Photo Effects</string>
+
+
+    <!-- PhotoEffectsActivity Layout -->
+    <string name="btnChoosePhoto_text">Photos</string>
+    <string name="home_btn_take_picture">Camera</string>
+    <string name="choose_photo_dialog_title">Open Photo</string>
+    <string name="btnGalleryPreview_text">Gallery</string>
+    <string name="text_font_family">sans-serif-light</string>
+    <string name="camera_not_available_message">Camera not available or something went wrong! Please try again later.</string>
+    <string name="camera_create_file_failed">Can not create photo, please try again.</string>
+    <!-- END PhotoEffectsActivity Layout -->
+
+    <!--EDIT PREVIEW-->
+    <string name="loading_dialog_text">Loading&#x2026;</string>
+
+
+    <!--EDITOR ACTIVITY-->
+    <string name="editor_list_enhance_text">Enhance</string>
+    <string name="editor_process_dialog_message">Processing&#8230;</string>
+    <!--END EDITOR ACTIVITY-->
+
+    <!--EDITOR TOOL-->
+    <string name="enhance_tool_name">Enhance</string>
+
+
+    <!-- SaveCompleteDialog -->
+    <string name="savecompletedialog_filename">File Name: </string>
+    <string name="savecompletedialog_filesize">File Size: </string>
+    <string name="savecompletedialog_imagesize">Resolution: </string>
+    <!-- SaveCompleteDialog -->
+
+
+    <!-- Share Dialog -->
+    <string name="sharedialog_title">SHARE VIA</string>
+    <!-- END Share Dialog -->
+
+
+    <!-- GalleryPreview Activity -->
+    <string name="gallerypreview_processing_text">Processing&#x2026;</string>
+
+    <!-- END GalleryPreview Activity -->
+
+
+    <!-- AppSettings Activity -->
+    <string name="appsettings_title">SETTINGS</string>
+
+    <!-- END AppSettings Activity -->
+
+
+    <!-- RATEAPP Dialog -->
+    <string name="rateapp_message">You really seem to like this application. It would be great if you took a moment to rate and review it! Thanks you!</string>
+    <string name="rateapp_ratenow">Rate Now</string>
+    <string name="rateapp_ratelater">Not Now</string>
+    <string name="rateapp_never">No,Thanks</string>
+    <!-- END Rate app dialog -->
+
+
+    <!-- ADS -->
+    <string name="test_device_lu6200">7916A9B1AFC2BEE071769825D7FB8564</string>
+    <string name="editor_btnApply_text">Apply</string>
+    <string name="editor_btnUndo_text">Undo</string>
+    <string name="editor_tool_name_effects">Effects</string>
+    <string name="editor_apply_button_text">Apply</string>
+    <string name="editor_btn_done_text">Done</string>
+    <string name="editor_saving_progress_dialog">Saving&#8230;</string>
+
+    <!-- END ADS -->
+
+</resources>

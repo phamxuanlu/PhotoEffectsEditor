@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/app_background"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true">
+
+        <Button
+            android:id="@+id/btnApply"
+            android:text="@string/editor_btnApply_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/header"
+        android:layout_above="@+id/controller"
+        android:layout_height="fill_parent">
+
+        <com.ss.photoeffectseditor.widget.TouchImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+    <ViewFlipper
+        android:background="@color/editor_activity_background"
+        android:id="@+id/controller"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/tool_view"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/tool_listView"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:smoothScrollbar="false"
+                android:scrollingCache="false"
+                app:divider="@color/list_tool_divider_color"
+                app:hlv_dividerWidth="1dp"
+                android:choiceMode="singleChoice"
+                android:overScrollMode="always"
+                app:hlv_stackFromRight="false"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tool_detail"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/content_listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:smoothScrollbar="false"
+                android:scrollingCache="false"
+                app:divider="@color/list_tool_divider_color"
+                app:hlv_dividerWidth="1dp"
+                android:choiceMode="singleChoice"
+                android:overScrollMode="always"
+                app:hlv_stackFromRight="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tool_option"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+    </ViewFlipper>
+
+</RelativeLayout>

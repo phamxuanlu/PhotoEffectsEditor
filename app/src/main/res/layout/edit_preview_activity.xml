@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background">
+
+    <RelativeLayout
+        android:id="@+id/edit_ctrls"
+        android:layout_width="match_parent"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editpreview_buttons_layout_height"
+            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:baselineAligned="false"
+            android:background="@drawable/tools_button_background"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Edit -->
+
+            <ImageButton
+
+                android:id="@+id/btnEdit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_btn_edit"
+                android:paddingTop="@dimen/editpreview_button_padding_top"
+                android:paddingBottom="@dimen/editpreview_button_padding_bottom"></ImageButton>
+
+            <!-- Frame -->
+
+            <ImageButton
+                android:id="@+id/btnFrame"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/editpreview_button_padding_top"
+                android:paddingBottom="@dimen/editpreview_button_padding_bottom"
+                android:background="@drawable/ic_btn_frame"
+                android:layout_weight="1"></ImageButton>
+
+            <!-- Share -->
+
+            <ImageButton
+                android:id="@+id/btnShare"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/editpreview_button_padding_top"
+                android:paddingBottom="@dimen/editpreview_button_padding_bottom"
+                android:background="@drawable/ic_btn_share"
+                android:layout_weight="1"></ImageButton>
+
+            <!-- Save -->
+
+            <ImageButton
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/editpreview_button_padding_top"
+                android:paddingBottom="@dimen/editpreview_button_padding_bottom"
+                android:background="@drawable/ic_btn_save"
+                android:layout_weight="1"></ImageButton>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.ss.photoeffectseditor.widget.TouchImageView
+        android:id="@+id/imgv_preview"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/edit_ctrls"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent" />
+
+    <!--com.google.android.gms.ads.AdView
+        android:id="@+id/edit_preview_banner_ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/edit_preview_banner_ad_unit_id" /-->
+
+</RelativeLayout>

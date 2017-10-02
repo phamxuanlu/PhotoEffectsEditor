@@ -118,7 +118,7 @@ public class OpenBitmapAsyncTask extends AsyncTask<Void, Void, Void> {
 
 
     public interface OnBitmapOpenedListener {
-        public void onBitmapOpened(Bitmap bm);
+        void onBitmapOpened(Bitmap bm);
     }
 
     public static class Builder {

@@ -11,21 +11,22 @@ import android.widget.TextView;
 
 import com.ss.photoeffectseditor.R;
 import com.ss.photoeffectseditor.asynctasks.PreviewThumbAsyncTask;
-import com.ss.photoeffectseditor.models.ToolObject;
+import com.ss.photoeffectseditor.widget.BaseToolObject;
 
 import java.util.List;
 
 /**
  * Created by phamxuanlu@gmail.com on 3/17/2015.
  */
+@Deprecated
 public class EditorListToolContentAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private List<ToolObject> data;
+    private List<BaseToolObject> data;
     private Bitmap bmThumb;
 
-    public EditorListToolContentAdapter(Context context, List<ToolObject> data) {
+    public EditorListToolContentAdapter(Context context, List<BaseToolObject> data) {
         this.context = context;
         this.data = data;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +40,7 @@ public class EditorListToolContentAdapter extends BaseAdapter {
     }
 
     @Override
-    public ToolObject getItem(int position) {
+    public BaseToolObject getItem(int position) {
         if (this.data == null) {
             return null;
         } else {
@@ -64,7 +65,7 @@ public class EditorListToolContentAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final ToolObject obj = this.data.get(position);
+        final BaseToolObject obj = this.data.get(position);
         holder.toolIcon.setImageResource(R.drawable.ic_btn_edit);
         holder.toolName.setText(obj.name);
         return convertView;

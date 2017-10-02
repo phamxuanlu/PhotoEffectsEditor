@@ -2,7 +2,7 @@
 <resources>
 
     <string name="empty_content_description"></string>
-    <string name="app_name">Photo Effects</string>
+    <string name="app_name">Image Editor</string>
 
 
     <!-- PhotoEffectsActivity Layout -->
@@ -17,10 +17,12 @@
 
     <!--EDIT PREVIEW-->
     <string name="loading_dialog_text">Loading&#x2026;</string>
+    <string name="saving_dialog_text">Saving&#x2026;</string>
 
 
     <!--EDITOR ACTIVITY-->
     <string name="editor_list_enhance_text">Enhance</string>
+    <string name="editor_back_button_text">Back</string>
     <string name="editor_process_dialog_message">Processing&#8230;</string>
     <!--END EDITOR ACTIVITY-->
 
@@ -32,6 +34,8 @@
     <string name="savecompletedialog_filename">File Name: </string>
     <string name="savecompletedialog_filesize">File Size: </string>
     <string name="savecompletedialog_imagesize">Resolution: </string>
+    <string name="savephotodialog_save_text">SAVE</string>
+    <string name="savephotodialog_share_text">SHARE</string>
     <!-- SaveCompleteDialog -->
 
 
@@ -60,8 +64,8 @@
     <!-- END Rate app dialog -->
 
 
-    <!-- ADS -->
-    <string name="test_device_lu6200">7916A9B1AFC2BEE071769825D7FB8564</string>
+
+
     <string name="editor_btnApply_text">Apply</string>
     <string name="editor_btnUndo_text">Undo</string>
     <string name="editor_tool_name_effects">Effects</string>
@@ -69,6 +73,6 @@
     <string name="editor_btn_done_text">Done</string>
     <string name="editor_saving_progress_dialog">Saving&#8230;</string>
 
-    <!-- END ADS -->
+
 
 </resources>

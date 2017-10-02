@@ -8,8 +8,12 @@
     <color name="controls_background">#30101010</color>
     <color name="home_text_color">#101010</color>
 
+    <!--HOME-->
+    <color name="preview_button_background">#50FFFFFF</color>
+    <color name="preview_button_background_pressed">#70BFBFBF</color>
+
     <!-- 653d84 -->
-    <color name="editor_activity_background">#30FFFFFF</color>
+    <color name="editor_activity_background">#FFFFFF</color>
     <color name="edit_activity_control_background">#f1efeb</color>
     <color name="ads_background">#FFFFFF</color>
     <color name="select_frame_item_image_background">#FFF</color>
@@ -23,6 +27,12 @@
     <color name="selectframe_tab_text_color">#FFFFFF</color>
 
     <!--EDITOR-->
-    <color name="list_tool_item_text_color">#AAAAAA</color>
+    <color name="list_tool_item_text_color">#101010</color>
     <color name="list_tool_divider_color">#AAAAAA</color>
+    <color name="editor_button_background">#FFFFFF</color>
+    <color name="editor_button_background_pressed">#FAFBFC</color>
+    <color name="editor_buttons_layout_background">#e9e8e6</color>
+    <color name="back_cl">#202020</color>
+    <color name="base_color">#cedded</color>
+
 </resources>

@@ -1,63 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/photo_effect_activity_layout"
     android:layout_width="match_parent"
-    android:background="@drawable/bg_home_blur"
+    android:background="#e9e8e6"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/app_version"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/pelightweight512"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:textColor="@color/home_text_color"
+        android:text="Image Editor" />
+
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/app_name"
+        android:textSize="15sp"
+        android:textColor="@color/home_text_color"
+        android:text="version 1.0.1"
+        android:gravity="center" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/primaryButtons"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:orientation="vertical"
         android:layout_above="@+id/secondaryButtons"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/btnSelectPhoto"
+            style="@style/home_button_style"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="SELECT PHOTO" />
 
-            <LinearLayout
-                android:id="@+id/btnOpenPhoto"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/btnCapture"
+            android:layout_toRightOf="@+id/btnSelectPhoto"
+            android:layout_width="match_parent"
+            style="@style/home_button_style"
+            android:layout_height="wrap_content"
+            android:text="OPEN CAMERA" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/home_button_padding"
-                    android:layout_marginTop="@dimen/home_button_padding"
-                    android:textColor="@color/home_text_color"
-                    android:text="@string/btnChoosePhoto_text"
-                    android:textSize="@dimen/home_button_text_size"
-                    android:fontFamily="@string/text_font_family" />
+        <TextView
+            android:id="@+id/btnFrames"
+            android:layout_toRightOf="@+id/btnSelectPhoto"
+            android:layout_width="match_parent"
+            style="@style/home_button_style"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="PHOTO FRAME" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/btnCamera"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@drawable/button_background"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_btn_take_picture"
-                    android:textColor="@color/home_text_color"
-                    android:layout_marginBottom="@dimen/home_button_padding"
-                    android:layout_marginTop="@dimen/home_button_padding"
-                    android:textSize="@dimen/home_button_text_size"
-                    android:fontFamily="@string/text_font_family" />
-
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

@@ -1,5 +1,6 @@
 package com.ss.photoeffectseditor.bitmap;
 
+@Deprecated
 public interface IPixelReader {
-	public int getPixel(BitmapMatrix bmw, int x, int y);
+	int getPixel(BitmapMatrix bmw, int x, int y);
 }

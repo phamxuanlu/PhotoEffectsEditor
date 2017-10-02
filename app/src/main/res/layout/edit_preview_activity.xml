@@ -79,13 +79,4 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/transparent" />
 
-    <!--com.google.android.gms.ads.AdView
-        android:id="@+id/edit_preview_banner_ads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/edit_preview_banner_ad_unit_id" /-->
-
 </RelativeLayout>

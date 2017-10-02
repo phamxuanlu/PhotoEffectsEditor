@@ -3,6 +3,8 @@ package com.ss.photoeffectseditor.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Typeface;
@@ -16,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ss.photoeffectseditor.AppConfigs;
 import com.ss.photoeffectseditor.AppConstants;
 import com.ss.photoeffectseditor.R;
 import com.ss.photoeffectseditor.utils.StorageUtils;
@@ -31,10 +34,11 @@ public class PhotoEffectsActivity extends Activity {
     private final String IMG_CAPTURED_PATH = "IMG_CAPTURED_PATH";
 
 
-    private ViewGroup btnOpenPhoto;
-    private ViewGroup btnCamera;
-    private ViewGroup primaryButtons;
-
+    private TextView btnOpenPhoto;
+    private TextView btnCamera;
+    private ViewGroup activityLayout;
+    private TextView txtVersion;
+    private TextView txtAppName;
     private String capturedPhoto;
 
     @Override
@@ -43,19 +47,36 @@ public class PhotoEffectsActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.photoeffects_activity_layout);
-
         setupViews();
     }
 
     private void setupViews() {
-        primaryButtons = (ViewGroup)findViewById(R.id.primaryButtons);
-        btnOpenPhoto = (ViewGroup) findViewById(R.id.btnOpenPhoto);
+        activityLayout = (ViewGroup) findViewById(R.id.photo_effect_activity_layout);
+        btnOpenPhoto = (TextView) findViewById(R.id.btnSelectPhoto);
         btnOpenPhoto.setOnClickListener(viewClickListener);
-        btnCamera = (ViewGroup) findViewById(R.id.btnCamera);
+        btnCamera = (TextView) findViewById(R.id.btnCapture);
         btnCamera.setOnClickListener(viewClickListener);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Existence-Light.otf");
-        setupFont(primaryButtons,tf);
+        findViewById(R.id.btnFrames).setOnClickListener(viewClickListener);
+        Typeface tf = Typeface.createFromAsset(getAssets(), AppConfigs.getInstance().TYPE_FACE);
+        setupFont(activityLayout, tf);
+
+        txtAppName = (TextView) findViewById(R.id.app_name);
+        txtVersion = (TextView) findViewById(R.id.app_version);
+        PackageInfo pkg = null;
+        try {
+            pkg = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String verName = "N/A";
+        if (pkg != null) {
+            verName = pkg.versionName;
+        }
+        txtVersion.setText("version " + verName + " beta");
+        txtAppName.setText(getString(R.string.app_name));
 
     }
 
@@ -93,7 +114,7 @@ public class PhotoEffectsActivity extends Activity {
                     String filePath = StorageUtils.getPathFromUri(selectedPhoto, this);
                     Bundle bundle = new Bundle();
                     bundle.putString(AppConstants.SELECTED_PHOTO, filePath);
-                   // Toast.makeText(this, filePath, Toast.LENGTH_LONG).show();
+                    // Toast.makeText(this, filePath, Toast.LENGTH_LONG).show();
                     Intent editor = new Intent(PhotoEffectsActivity.this, EditPreviewActivity.class);
                     editor.putExtras(bundle);
                     startActivity(editor);
@@ -114,14 +135,17 @@ public class PhotoEffectsActivity extends Activity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btnOpenPhoto:
-                    Intent openPhotoIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                    openPhotoIntent.setType("image/*");
-                    startActivityForResult(Intent.createChooser(openPhotoIntent, getResources().getString(R.string.choose_photo_dialog_title)),
-                            AppConstants.CHOOSE_PHOTO_REQUEST_CODE);
+                case R.id.btnSelectPhoto:
+                    Intent intentPick = new Intent();
+                    intentPick.setData(Uri.parse("content://media/external/images/media"));
+                    intentPick.setAction(Intent.ACTION_PICK);
+                    startActivityForResult(intentPick, AppConstants.CHOOSE_PHOTO_REQUEST_CODE);
                     break;
-                case R.id.btnCamera:
+                case R.id.btnCapture:
                     takePhotoFromCamera();
+                    break;
+                case R.id.btnFrames:
+                    Toast.makeText(PhotoEffectsActivity.this, "Not implement", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -141,7 +165,7 @@ public class PhotoEffectsActivity extends Activity {
         }
         Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File outPut = StorageUtils.createImageFile(AppConstants.CAMERA_PICTURE_PREFIX,
-                StorageUtils.getCacheDirectory(), ".JPG");
+                StorageUtils.getCacheDirectory(), ".JPEG");
         if (outPut == null) {
             Toast.makeText(
                     this,
@@ -157,5 +181,6 @@ public class PhotoEffectsActivity extends Activity {
         if (takeIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takeIntent, AppConstants.CAMERA_TAKE_A_PICTURE);
         }
+
     }
 }

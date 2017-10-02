@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.ss.photoeffectseditor.ip.ITransformation;
+import com.ss.photoeffectseditor.widget.BaseToolObject;
 
 import java.lang.ref.WeakReference;
 
@@ -17,14 +17,14 @@ public class PreviewThumbAsyncTask extends AsyncTask<Void, Void, Void> {
 
 
     private WeakReference<ImageView> thumbRef;
-    private ITransformation transformation;
+    private BaseToolObject baseToolObject;
     private Bitmap bmThumb;
     private Bitmap processed;
     private OnProcessedListener onProcessedListener;
 
     private PreviewThumbAsyncTask(Builder builder) {
         this.thumbRef = new WeakReference<ImageView>(builder.btnThumb);
-        this.transformation = builder.transformation;
+        this.baseToolObject = builder.baseToolObject;
         this.bmThumb = builder.bmThumb;
         this.onProcessedListener = builder.onProcessedListener;
     }
@@ -32,8 +32,10 @@ public class PreviewThumbAsyncTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        processed = transformation.perform(bmThumb);
-
+        if (baseToolObject != null) {
+            if (baseToolObject.transform != null)
+                processed = baseToolObject.transform.perform(bmThumb);
+        }
         return null;
     }
 
@@ -56,19 +58,19 @@ public class PreviewThumbAsyncTask extends AsyncTask<Void, Void, Void> {
     }
 
     public interface OnProcessedListener {
-        public void onProcessed();
+        void onProcessed();
     }
 
     public static class Builder {
         private ImageView btnThumb;
-        private ITransformation transformation;
+        private BaseToolObject baseToolObject;
         private Bitmap bmThumb;
         private OnProcessedListener onProcessedListener;
 
-        public Builder(ImageView btnThumb, ITransformation transformation, Bitmap bmThumb) {
+        public Builder(ImageView btnThumb, BaseToolObject effectTool, Bitmap bmThumb) {
             this.btnThumb = btnThumb;
             this.bmThumb = bmThumb;
-            this.transformation = transformation;
+            this.baseToolObject = effectTool;
         }
 
         public Builder setOnProcessedListener(OnProcessedListener listener) {

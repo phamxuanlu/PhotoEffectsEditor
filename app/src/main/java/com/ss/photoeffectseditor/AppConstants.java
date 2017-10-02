@@ -1,8 +1,6 @@
 package com.ss.photoeffectseditor;
 
 public class AppConstants {
-    public static final String AVIARY_API_SECRET_KEY = "7f40dbd9eca2c738";
-    public static final String FRAME_ORIENTATION = "FRAME_ORIENTATION";
     public static final String APP_FOLDER = "PhotoEffects";
     public static final String APP_CACHE_FOLDER = ".PhotoEffectsCache";
     public static final String DEFAULT_FILE_PREFIX = "PE_";
@@ -13,15 +11,9 @@ public class AppConstants {
     public static final String APP_PREFERENCE_NEVER = "APP_PREFERENCE_NEVER";
 
     public static final String SELECTED_PHOTO = "SELECTED_PHOTO";
-    public static final String SELECTED_FRAME = "SELECTED_FRAME";
-    public static final String SELECTED_FRAME_CATEGORY = "SELECTED_FRAME_CATEGORY";
-    public static final String EMPTY_PHOTO_SELECTED = "EMPTY_PHOTO_SELECTED";
-    public static final String ASSET_FRAME_DIR = "frames";
     public static final int CHOOSE_PHOTO_REQUEST_CODE = 156;
     public static final int REQUEST_CODE_EDIT_ACTIVITY = 100;
-    public static final int FRAME_REQUEST_CODE = 101;
     public static final int CAMERA_TAKE_A_PICTURE = 102;
-
     public static final long BUTTON_TOUCH_VIBRATE_TIME_MS = 60;
     public static final long ITEM_TOUCH_VIBRATE_TIME_MS = 40;
 }

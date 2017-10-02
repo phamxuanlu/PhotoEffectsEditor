@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="250dp"
     android:layout_height="300dp"
-    android:background="@drawable/app_background" >
+    android:background="@drawable/app_background">
 
     <ImageView
         android:id="@+id/dialog_image_preview"
@@ -19,31 +19,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/dialog_control_layout"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp" >
+        android:paddingLeft="7dp"
+        android:paddingTop="5dp">
 
-        <TextView
+        <EditText
             android:id="@+id/dialog_info_filename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/save_complete_dialog_info_text_color" />
-
-        <TextView
-            android:id="@+id/dialog_info_file_size"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/dialog_info_filename"
+            android:textSize="18sp"
             android:textColor="@color/save_complete_dialog_info_text_color" />
 
         <TextView
             android:id="@+id/dialog_info_image_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/dialog_info_file_size"
+            android:textSize="18sp"
+            android:layout_below="@+id/dialog_info_filename"
             android:textColor="@color/save_complete_dialog_info_text_color" />
     </RelativeLayout>
 
@@ -54,50 +50,32 @@
         android:layout_alignParentBottom="true"
         android:background="@color/controls_background"
         android:gravity="center"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp" >
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/btn_share_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
+        <TextView
+            android:paddingTop="@dimen/save_dialog_button_padding"
+            android:paddingBottom="@dimen/save_dialog_button_padding"
+            android:id="@+id/dialog_btnSave"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/save_complete_dialog_info_text_color"
+            android:background="@drawable/save_dialog_button_background"
+            android:text="@string/savephotodialog_save_text" />
 
-            <ImageButton
-                android:id="@+id/dialog_btnShare"
-                android:layout_width="@dimen/dialog_btn_size"
-                android:layout_height="@dimen/dialog_btn_size"
-                android:background="@drawable/ctrl_share" />
-        </RelativeLayout>
+        <TextView
+            android:paddingTop="@dimen/save_dialog_button_padding"
+            android:paddingBottom="@dimen/save_dialog_button_padding"
+            android:id="@+id/dialog_btnShare"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/save_complete_dialog_info_text_color"
+            android:background="@drawable/save_dialog_button_background"
+            android:text="@string/savephotodialog_share_text" />
 
-        <RelativeLayout
-            android:id="@+id/btn_open_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-
-            <ImageButton
-                android:id="@+id/dialog_open_image"
-                android:layout_width="@dimen/dialog_btn_size"
-                android:layout_height="@dimen/dialog_btn_size"
-                android:background="@drawable/ctrl_preview" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/btn_dismiss_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-
-            <ImageButton
-                android:id="@+id/dialog_dismiss_image"
-                android:layout_width="@dimen/dialog_btn_size"
-                android:layout_height="@dimen/dialog_btn_size"
-                android:background="@drawable/ctrl_ok" />
-        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

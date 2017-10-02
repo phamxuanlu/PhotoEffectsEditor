@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ss.photoeffectseditor"
-    android:versionCode="1"
-    android:versionName="1.0">
-
-    <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="21" />
+    package="com.ss.photoeffectseditor">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,7 +11,7 @@
     <application
         android:name=".PhotoEditorApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/pelightweight"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
@@ -32,7 +26,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.EditPreviewActivity">
+        <activity
+            android:name=".activities.EditPreviewActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.VIEW" />
@@ -51,11 +47,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.EditorActivity">
-
-        </activity>
-
-        <activity android:name=".activities.TestActivity"></activity>
+        <activity
+            android:name=".activities.EditorActivity"
+            android:screenOrientation="portrait"></activity>
 
 
     </application>

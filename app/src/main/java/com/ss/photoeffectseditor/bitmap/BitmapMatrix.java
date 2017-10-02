@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
 
+@Deprecated
 public class BitmapMatrix {
 	protected int WIDTH;
 	protected int HEIGHT;

@@ -7,14 +7,33 @@
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true">
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/tools_button_background">
 
-        <Button
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/editor_buttons_background"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/editor_back_button_text"
+            android:textSize="22sp" />
+
+        <TextView
             android:id="@+id/btnApply"
             android:text="@string/editor_btnApply_text"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/editor_buttons_background"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="22sp" />
 
     </RelativeLayout>
 
@@ -81,9 +100,42 @@
         <LinearLayout
             android:id="@+id/tool_option"
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_height="match_parent">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/toolSeekMinus"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:background="@android:color/transparent" />
+
+                <SeekBar
+                    android:id="@+id/toolSeekBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@+id/toolSeekPlus"
+                    android:layout_toRightOf="@id/toolSeekMinus"
+                    android:paddingBottom="3dip"
+                    android:paddingLeft="1px"
+                    android:paddingRight="1px"
+                    android:paddingTop="3dip"
+                    android:progressDrawable="@drawable/seekbar_drawable"
+                    android:thumb="@drawable/dark_drag"
+                    android:thumbOffset="-1px" />
+
+                <ImageButton
+                    android:id="@+id/toolSeekPlus"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent" />
+            </RelativeLayout>
         </LinearLayout>
 
     </ViewFlipper>

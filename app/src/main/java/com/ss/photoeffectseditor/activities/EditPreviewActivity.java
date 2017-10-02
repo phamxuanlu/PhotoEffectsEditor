@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,16 +13,13 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ss.photoeffectseditor.AppConfigs;
 import com.ss.photoeffectseditor.AppConstants;
-import com.ss.photoeffectseditor.PhotoEditorApplication;
 import com.ss.photoeffectseditor.R;
 import com.ss.photoeffectseditor.asynctasks.OpenBitmapAsyncTask;
+import com.ss.photoeffectseditor.dialogs.SavePhotoDialog;
 import com.ss.photoeffectseditor.dialogs.ShareIntentsDialog;
 import com.ss.photoeffectseditor.utils.GLog;
 import com.ss.photoeffectseditor.utils.StorageUtils;
@@ -32,8 +27,7 @@ import com.ss.photoeffectseditor.widget.TouchImageView;
 import com.ss.photoeffectseditor.widget.VibrateOnTouchListener;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * @author phamxuanlu@gmail.com
@@ -42,7 +36,7 @@ import java.util.List;
  *         edit ảnh Aviary FeatherActivity, trình đóng khung FrameActivity Share
  *         bức ảnh đang hiển thị (gốc hoặc đã chỉnh sửa) Lưu bức ảnh đã edit vào
  *         thư mục của ứng dụng.
- *         <p/>
+ *
  *         - EditPreviewActivity cũng là activity nhận file ảnh nếu người dùng
  *         nhấn share sang ứng dụng và chỉnh sửa như bình thường
  */
@@ -60,27 +54,18 @@ public class EditPreviewActivity extends Activity {
     private OpenBitmapAsyncTask openTask;
     //private SaveBitmapAsyncTask saveTask;
     private ImageButton btnEdit;
-    private boolean isSaved;
-
     private ImageButton btnFrame;
     private ImageButton btnShare;
     private ImageButton btnSave;
 
-    private List<String> listCache;
-
-    // ADS
-    private AdView editpreview_banner;
-    private AdRequest editpreview_banner_request;
-
-    // END ADS
-
     /**
      * lấy đường dẫn bức ảnh được chọn, load lên imageview, tạo file cache, ảnh
-     * sau khi edit bằng aviary được lưu vào cache.
+     * sau khi edit bằng editor được lưu vào cache.
      * <p/>
-     * Có các trường hợp để mở một bức ảnh 1. Mở trực tiếp chọn từ Gallery 2.
-     * Chọn chụp từ Camera 3. Nhận Action Filter Share, Send, Open, Edit, Pick
-     * từ các ứng dụng khác
+     * Có các trường hợp để mở một bức ảnh
+     * 1. Mở trực tiếp chọn từ Gallery
+     * 2.Chọn chụp từ Camera
+     * 3. Nhận Action Filter Share, Send, Open, Edit, Pick từ các ứng dụng khác
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +78,6 @@ public class EditPreviewActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.edit_preview_activity);
         setupViews();
-        //setupAds();
-        sendAnalyticsData();
-        listCache = new ArrayList<String>();
-        //setIsLoaded(false);
-        isSaved = true;
 
         // Receive
         Intent receiveIntent = getIntent();
@@ -148,24 +128,6 @@ public class EditPreviewActivity extends Activity {
 
     }
 
-    private void sendAnalyticsData() {
-        PackageInfo pkg = null;
-        try {
-            pkg = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        String verName = "N/A";
-        if (pkg != null) {
-            verName = pkg.versionName;
-        }
-        Tracker t = ((PhotoEditorApplication) getApplication())
-                .getTracker(PhotoEditorApplication.TrackerName.APP_TRACKER);
-        t.setScreenName(getString(R.string.app_name) + " EDITPREVIEW  version " + verName + " CHPLAY");
-        t.enableAdvertisingIdCollection(true);
-        t.send(new HitBuilders.AppViewBuilder().build());
-    }
-
     private void setupViews() {
         prv_Image = (TouchImageView) findViewById(R.id.imgv_preview);
         //prv_Image.setDisplayType(DisplayType.FIT_TO_SCREEN);
@@ -196,9 +158,6 @@ public class EditPreviewActivity extends Activity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case AppConstants.REQUEST_CODE_EDIT_ACTIVITY:
-                    if (!selected_photo.equals(edited_photo)) {
-                        listCache.add(edited_photo);
-                    }
                     openTask = new OpenBitmapAsyncTask.Builder(this, edited_photo)
                             .setImageView(prv_Image)
                             .setRequestSize(AppConfigs.getInstance().deviceWidth, AppConfigs.getInstance().deviceHeight)
@@ -215,18 +174,12 @@ public class EditPreviewActivity extends Activity {
 
     @Override
     protected void onPause() {
-        if (editpreview_banner != null) {
-            editpreview_banner.pause();
-        }
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (editpreview_banner != null) {
-            editpreview_banner.resume();
-        }
     }
 
     @Override
@@ -236,19 +189,6 @@ public class EditPreviewActivity extends Activity {
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bmDr = (BitmapDrawable) drawable;
             bmDr.getBitmap().recycle();
-        }
-
-        if (editpreview_banner != null) {
-            editpreview_banner.destroy();
-        }
-
-        if (listCache != null) {
-            for (int i = 0; i < listCache.size(); i++) {
-                File f = new File(listCache.get(i));
-                if (f.delete()) {
-                    GLog.v("EDITPREVIEW", "FILE DELETED: " + listCache.get(i));
-                }
-            }
         }
 
         // Cancel load image task
@@ -265,7 +205,6 @@ public class EditPreviewActivity extends Activity {
         @Override
         public void onClick(View v) {
             int id = v.getId();
-            GLog.v("CLICKED", "" + id);
             VibrateOnTouchListener vEx = new VibrateOnTouchListener(
                     EditPreviewActivity.this);
             vEx.onTouchVibrate(AppConstants.BUTTON_TOUCH_VIBRATE_TIME_MS);
@@ -276,10 +215,22 @@ public class EditPreviewActivity extends Activity {
 
                 case R.id.btnFrame:
                     // frameEdit();
+                    Toast.makeText(EditPreviewActivity.this, "Comming soon ...", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.btnSave:
-                   // saveEdited();
+                    File editedFile = new File(edited_photo);
+                    if (!editedFile.exists()) {
+                        try {
+                            StorageUtils.copyFile(new File(selected_photo), editedFile);
+                        } catch (IOException e) {
+                            Toast.makeText(EditPreviewActivity.this, "An error has occurred, please try again!", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                    }
+                    progress.setMessage(getString(R.string.saving_dialog_text));
+                    SavePhotoDialog savePhotoDialog = new SavePhotoDialog(EditPreviewActivity.this, edited_photo, progress);
+                    savePhotoDialog.show();
                     break;
 
                 case R.id.btnShare:

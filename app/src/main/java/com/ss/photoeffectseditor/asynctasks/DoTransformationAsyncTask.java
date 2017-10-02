@@ -1,14 +1,16 @@
 package com.ss.photoeffectseditor.asynctasks;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import com.ss.photoeffectseditor.AppConfigs;
-import com.ss.photoeffectseditor.ip.ITransformation;
+import com.ss.photoeffectseditor.imageprocessing.ITransformation;
 import com.ss.photoeffectseditor.utils.BitmapUtils;
+import com.ss.photoeffectseditor.utils.GLog;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by phamxuanlu@gmail.com on 3/6/2015.
@@ -18,33 +20,34 @@ import com.ss.photoeffectseditor.utils.BitmapUtils;
 public class DoTransformationAsyncTask extends AsyncTask<Void, Void, Void> {
     private String path;
     private ITransformation transformation;
-    private ProgressDialog progressDialog;
-    private Context context;
+    private WeakReference<ProgressDialog> prRef;
     private Bitmap bmSource;
     private Bitmap bmResult;
     private boolean isNeedDecodeFile;
     private OnPerformedListener onPerformedListener;
 
+    private long startTime;
+    private long endTime;
+
+
     public interface OnPerformedListener {
-        public void onPerformed(Bitmap bm);
+        void onPerformed(Bitmap bm);
     }
 
-    public DoTransformationAsyncTask(Context context, String path, ITransformation transformation,
+    public DoTransformationAsyncTask(String path, ITransformation transformation,
                                      ProgressDialog progressDialog, OnPerformedListener onPerformedListener) {
-        this.context = context;
         this.transformation = transformation;
         this.path = path;
-        this.progressDialog = progressDialog;
+        this.prRef = new WeakReference<ProgressDialog>(progressDialog);
         this.isNeedDecodeFile = true;
         this.onPerformedListener = onPerformedListener;
     }
 
-    public DoTransformationAsyncTask(Context context, Bitmap bmSource, ITransformation transformation,
+    public DoTransformationAsyncTask(Bitmap bmSource, ITransformation transformation,
                                      ProgressDialog progressDialog, OnPerformedListener onPerformedListener) {
-        this.context = context;
         this.bmSource = bmSource;
         this.transformation = transformation;
-        this.progressDialog = progressDialog;
+        this.prRef = new WeakReference<ProgressDialog>(progressDialog);
         this.isNeedDecodeFile = false;
         this.onPerformedListener = onPerformedListener;
     }
@@ -53,7 +56,11 @@ public class DoTransformationAsyncTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.show();
+        // GLog.v("TRANSFORM","START PERFORM TRANSFORM");
+        startTime = System.currentTimeMillis();
+        if (prRef != null && prRef.get() != null) {
+            prRef.get().show();
+        }
     }
 
     @Override
@@ -77,7 +84,11 @@ public class DoTransformationAsyncTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        progressDialog.dismiss();
+        endTime = System.currentTimeMillis();
+        GLog.v("TRANSFORM", "EXECUTE TIME = " + ((endTime - startTime) / 1000.0));
+        if (prRef != null && prRef.get() != null) {
+            prRef.get().dismiss();
+        }
         if (onPerformedListener != null) {
             onPerformedListener.onPerformed(bmResult);
         }

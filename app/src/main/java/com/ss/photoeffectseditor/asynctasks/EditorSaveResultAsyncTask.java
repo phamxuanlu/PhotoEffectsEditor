@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
 public class EditorSaveResultAsyncTask extends AsyncTask<Void, Void, Void> {
 
     public interface OnSaveCompletedListener {
-        public void onSaveCompleted();
+        void onSaveCompleted();
     }
 
     private Context context;
